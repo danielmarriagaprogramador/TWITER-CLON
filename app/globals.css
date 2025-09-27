@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    
+    --foreground: #000000;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+.x{
+  color : white;
+  width: 5vh;
+}
+
+.mama{
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #fff;
+}
+
+
+.padre {
+  display: flex;
+  flex: 1;        /* <- ocupa el espacio entre el header (si hubiera) y el footer */
+  width: 100%;
+  /* quita min-height/height si lo tenías */
+}
+
+
+.imagen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.formulario {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.iniciodeseccion {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+.iniciodeseccion1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+.parrafo{
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+  color: #9c9c9c;
+}
+
+.btn-auth {
+   width: 100% !important;
+  max-width: 320px !important;
+  padding: 12px 16px;
+  margin: 1rem auto 0;
+  border-radius: 100vh;
+  border: 1px solid #ccc;
+  background-color: #e6e6e6;
+  color: #000;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-align: center;
+  box-sizing: border-box;
+  display: block;
+}
+
+.politicas{
+  color: #1d9bf0;
+  
+}
+
+
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 10px 20px;
+  background: transparent;
+  position: static;  /* asegúrate de NO tener fixed/absolute */
+  margin-top: auto;  /* empuja el footer al fondo si hay poco contenido */
+}
+
+.footer nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer nav ul li {
+  color: #71767b;
+  font-size: 13px;
+}
+
+.footer nav ul li a {
+  color: #71767b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer nav ul li a:hover {
+  text-decoration: underline;
+  color: #1d9bf0;
+}
+.parrafo1{
+  font-size: 1.2rem;
+  color: #ffffff;
+  
+} 
+
+
+html, body {
+  height: 100%;
+}
+
+
+/* Ocultar scrollbar sin desactivar scroll */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none; /* IE y Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
+@media (min-width: 768px) {
+  .btn-auth {
+    max-width: 400px;   /* más ancho en escritorio */
+  }
+}
