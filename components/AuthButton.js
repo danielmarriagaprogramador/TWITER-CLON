@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth, signInWithGoogle, logout } from "../app/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import Image from "next/image"; // 👈 Importante
+import Image from "next/image"; 
 
 export default function AuthButton() {
   const [user, setUser] = useState(null);
@@ -29,7 +29,7 @@ export default function AuthButton() {
   if (redirecting) {
     return (
       <div className="fixed inset-0 flex flex-col items-center justify-center bg-black text-white z-50">
-        {/* 👇 Cambié <img> por next/image con layout responsivo */}
+
         <div className="relative w-20 h-20 mb-4 animate-pulse">
           <Image
             src="/twitter-x-logo-white (3).svg"
@@ -91,3 +91,4 @@ export default function AuthButton() {
     </div>
   );
 }
+
