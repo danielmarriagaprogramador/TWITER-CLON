@@ -24,7 +24,7 @@ export default function CreateAccountModal() {
       let uid = null;
 
       if (useEmail) {
-        // Registro por correo
+    
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           contact,
@@ -37,7 +37,7 @@ export default function CreateAccountModal() {
         });
       }
 
-      // Guardar en Firestore
+  
       await addDoc(collection(db, "users"), {
         name,
         contact,
@@ -50,7 +50,7 @@ export default function CreateAccountModal() {
 
       alert("✅ Usuario registrado correctamente");
 
-      // Reiniciar formulario
+ 
       setName("");
       setContact("");
       setPassword("");
@@ -93,7 +93,7 @@ export default function CreateAccountModal() {
                 ✕
               </button>
 
-              {/* Logo con next/image */}
+         
               <Image
                 src="/twitter-x-logo-white (3).svg"
                 alt="Logo X"
@@ -236,4 +236,5 @@ export default function CreateAccountModal() {
     </>
   );
 }
+
 
