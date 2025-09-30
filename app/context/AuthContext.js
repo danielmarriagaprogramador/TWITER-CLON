@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
       if (firebaseUser) {
         setUser(firebaseUser);
 
-        // 🔥 Guardar/actualizar usuario en Firestore
+      
         try {
           await setDoc(
             doc(db, "users", firebaseUser.uid),
@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
               provider: firebaseUser.providerData[0]?.providerId || "unknown",
               createdAt: new Date(),
             },
-            { merge: true } // 👈 evita sobrescribir datos existentes
+            { merge: true }
           );
         } catch (err) {
           console.error("Error guardando usuario en Firestore:", err);
@@ -92,3 +92,4 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   return useContext(AuthContext);
 }
+
