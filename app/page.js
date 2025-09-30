@@ -6,9 +6,9 @@ import LoginModal from "@/components/LoginModal";
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      {/* Contenedor principal */}
+      
       <div className="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full">
-        {/* Columna izquierda - Logo */}
+      
         <div className="flex-1 flex items-center justify-center p-8 lg:p-16">
           <div className="w-full max-w-sm lg:max-w-lg">
             <Image
@@ -22,9 +22,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Columna derecha - Formulario */}
+      
         <div className="flex-1 flex flex-col justify-center p-8 lg:p-16 max-w-lg lg:max-w-xl mx-auto lg:mx-0">
-          {/* Títulos principales */}
+        
           <div className="mb-8 lg:mb-12 text-center">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8 lg:mb-12">
               Lo que está <br /> pasando ahora
@@ -34,11 +34,11 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Botones de acción */}
+       
           <div className="space-y-4 mb-6 flex flex-col items-center lg:items-stretch">
             <AuthButton />
             
-            {/* Divisor */}
+         
             <div className="flex items-center my-6">
               <div className="flex-1 border-t border-gray-600"></div>
               <span className="px-4 text-gray-400 text-sm">o</span>
@@ -48,7 +48,7 @@ export default function Home() {
             <CreateAccountModal />
           </div>
 
-          {/* Términos de servicio */}
+       
           <p className="text-xs sm:text-sm text-gray-400 leading-relaxed mb-8 lg:mb-12 text-center lg:text-left">
             Al registrarte, aceptas los{" "}
             <a
