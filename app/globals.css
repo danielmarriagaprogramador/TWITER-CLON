@@ -55,9 +55,8 @@ body {
 
 .padre {
   display: flex;
-  flex: 1;        /* <- ocupa el espacio entre el header (si hubiera) y el footer */
+  flex: 1;        
   width: 100%;
-  /* quita min-height/height si lo tenías */
 }
 
 
@@ -121,8 +120,8 @@ body {
   text-align: center;
   padding: 10px 20px;
   background: transparent;
-  position: static;  /* asegúrate de NO tener fixed/absolute */
-  margin-top: auto;  /* empuja el footer al fondo si hay poco contenido */
+  position: static; 
+  margin-top: auto;  
 }
 
 .footer nav ul {
@@ -162,19 +161,19 @@ html, body {
 }
 
 
-/* Ocultar scrollbar sin desactivar scroll */
+
 ::-webkit-scrollbar {
   display: none;
 }
 
 html, body {
-  -ms-overflow-style: none; /* IE y Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
 }
 
 
 @media (min-width: 768px) {
   .btn-auth {
-    max-width: 400px;   /* más ancho en escritorio */
+    max-width: 400px;  
   }
 }
