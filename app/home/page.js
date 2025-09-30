@@ -7,12 +7,12 @@ import { Home as HomeIcon, Search, Bell, Mail, SquarePen as PenSquare, X, Image 
 export default function HomePage() {
   const { user, logout } = useAuth();
   const [posts, setPosts] = useState([]);
-  const [users, setUsers] = useState([]); // autores únicos construidos desde posts
+  const [users, setUsers] = useState([]); 
   const [newPost, setNewPost] = useState("");
   const [file, setFile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showLogoutMenu, setShowLogoutMenu] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null); // perfil en el centro
+  const [selectedUser, setSelectedUser] = useState(null); 
   const [isExplore, setIsExplore] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const textareaRef = useRef(null);
@@ -39,18 +39,18 @@ export default function HomePage() {
   });
   const [editAvatarFile, setEditAvatarFile] = useState(null);
 
-  // NUEVO: Estado para almacenar datos del perfil actual del usuario
+  // Estado para almacenar datos del perfil actual del usuario
   const [currentUserProfile, setCurrentUserProfile] = useState(null);
 
-  // NUEVOS: Estados para likes
+  // Estados para likes
   const [postLikes, setPostLikes] = useState({}); // { post_id: { count: number, isLiked: boolean } }
   const [likingPosts, setLikingPosts] = useState(new Set()); // posts que están procesando like
 
-  // NUEVOS: Estados para reposts
+  //  Estados para reposts
   const [postReposts, setPostReposts] = useState({}); // { post_id: { count: number, isReposted: boolean } }
   const [repostingPosts, setRepostingPosts] = useState(new Set()); // posts que están procesando repost
 
-  // NUEVOS: Estados para replies
+  // Estados para replies
   const [isReplyModalOpen, setIsReplyModalOpen] = useState(false);
   const [replyingToPost, setReplyingToPost] = useState(null);
   const [replyContent, setReplyContent] = useState("");
@@ -75,8 +75,7 @@ export default function HomePage() {
   useEffect(() => {
     fetchPosts();
     fetchFollowing(); // carga a quién sigo
-    fetchCurrentUserProfile(); // NUEVO: cargar perfil del usuario actual
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchCurrentUserProfile(); //cargar perfil del usuario actual
   }, []);
 
   useEffect(() => {
@@ -94,10 +93,10 @@ export default function HomePage() {
     }
     fetchFollowersCount(selectedUser.id);
     checkIfFollowingSelected(selectedUser.id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   }, [selectedUser]);
 
-  // NUEVA función para obtener el perfil actualizado del usuario actual
+  // función para obtener el perfil actualizado del usuario actual
   async function fetchCurrentUserProfile() {
     try {
       const { data, error } = await supabase
@@ -109,7 +108,7 @@ export default function HomePage() {
       if (!error && data) {
         setCurrentUserProfile(data);
       } else {
-        // Si no existe perfil, usar datos de Firebase Auth como fallback
+        // Si no existe perfil, usar datos de Firebase Auth 
         const displayName = user.displayName || user.name || user.email || "Sin nombre";
         const photoURL = user.photoURL || `https://ui-avatars.com/api/?background=random&name=${encodeURIComponent(displayName)}`;
         
@@ -140,7 +139,7 @@ export default function HomePage() {
     }
   }
 
-  // NUEVA: Función para obtener likes de todos los posts
+  // Función para obtener likes de todos los posts
   async function fetchPostLikes(postIds) {
     if (!postIds || postIds.length === 0) return;
 
@@ -172,7 +171,7 @@ export default function HomePage() {
     }
   }
 
-  // NUEVA: Función para obtener reposts de todos los posts
+  // N Función para obtener reposts de todos los posts
   async function fetchPostReposts(postIds) {
     if (!postIds || postIds.length === 0) return;
 
@@ -204,7 +203,7 @@ export default function HomePage() {
     }
   }
 
-  // NUEVA: Función para obtener el conteo de replies
+  //  Función para obtener el conteo de replies
   async function fetchPostReplies(postIds) {
     if (!postIds || postIds.length === 0) return;
 
@@ -282,7 +281,7 @@ export default function HomePage() {
     }
   }
 
-  // NUEVA: Función para dar/quitar like
+  // Función para dar/quitar like
   async function handleLike(postId) {
     if (likingPosts.has(postId)) return; // Evitar múltiples clicks
 
@@ -345,7 +344,7 @@ export default function HomePage() {
     }
   }
 
-  // NUEVA: Función para repost/unrepost
+  // Función para repost/unrepost
   async function handleRepost(postId) {
     if (repostingPosts.has(postId)) return; // Evitar múltiples clicks
 
@@ -408,7 +407,7 @@ export default function HomePage() {
     }
   }
 
-  // NUEVA: Función para abrir modal de reply
+  // Función para abrir modal de reply
   function openReplyModal(post) {
     setReplyingToPost(post);
     setReplyContent("");
@@ -416,7 +415,7 @@ export default function HomePage() {
     setIsReplyModalOpen(true);
   }
 
-  // NUEVA: Función para crear reply
+  // Función para crear reply
   async function addReply(e) {
     e.preventDefault();
     
@@ -479,14 +478,14 @@ export default function HomePage() {
     }
   }
 
-  // FUNCIÓN MODIFICADA: Crear post usando datos actualizados del perfil
+  //  Crear post usando datos actualizados del perfil
   async function addPost(e) {
     e.preventDefault();
     try {
       let mediaUrl = null;
       if (file) mediaUrl = await uploadFile(file);
 
-      // CAMBIO CRÍTICO: Usar datos del perfil actualizado en lugar de Firebase Auth
+      // Usar datos del perfil actualizado en lugar de Firebase Auth
       const authorName = currentUserProfile?.name || user.displayName || user.name || user.email || "Sin nombre";
       const authorAvatar = currentUserProfile?.avatar || user.photoURL || `https://ui-avatars.com/api/?background=random&name=${encodeURIComponent(authorName)}`;
 
@@ -557,7 +556,7 @@ export default function HomePage() {
     }
   }
 
-  // cuenta followers de un usuario (para mostrar en su perfil integrado)
+  // cuenta followers de un usuario para mostrar en su perfil 
   async function fetchFollowersCount(userId) {
     try {
       const { data, count, error } = await supabase
@@ -680,7 +679,7 @@ export default function HomePage() {
     }
   }
 
-  // FUNCIÓN MEJORADA: Guarda cambios de perfil
+  // Guarda cambios de perfil
   async function saveProfile(e) {
     e.preventDefault();
     try {
@@ -712,10 +711,10 @@ export default function HomePage() {
 
       console.log("✅ Perfil guardado:", data);
 
-      // MEJORA 1: Actualizar el estado local del perfil del usuario actual INMEDIATAMENTE
+      //  Actualizar el estado local del perfil del usuario actual
       setCurrentUserProfile(toUpsert);
 
-      // MEJORA 2: Actualizar posts existentes del usuario
+      //  Actualizar posts existentes del usuario
       try {
         console.log("🔄 Actualizando posts existentes...");
         const { error: postUpdateError } = await supabase
@@ -735,7 +734,7 @@ export default function HomePage() {
         console.error("Error al actualizar posts:", err);
       }
 
-      // MEJORA 3: Actualizar selectedUser si es el usuario actual
+      // Actualizar selectedUser si es el usuario actual
       if (selectedUser && String(selectedUser.id) === String(user.uid)) {
         setSelectedUser((su) => ({
           ...su,
@@ -748,7 +747,7 @@ export default function HomePage() {
         }));
       }
 
-      // MEJORA 4: Recargar posts para reflejar cambios inmediatamente
+      //  Recargar posts para reflejar cambios inmediatamente
       await fetchPosts();
 
       // Cerrar modal
@@ -761,7 +760,7 @@ export default function HomePage() {
     }
   }
 
-  // Query segura
+
   const q = (searchQuery || "").trim().toLowerCase();
 
   // Filtrado de posts y usuarios
@@ -798,7 +797,7 @@ export default function HomePage() {
     }
   }
 
-  // Helper para abrir perfil desde feed o lista de users
+  // abrir perfil desde feed o lista de users
   async function openProfileFromAuthor(authorId, authorName, authorAvatar) {
     try {
       const { data, error } = await supabase
@@ -833,7 +832,7 @@ export default function HomePage() {
       });
     }
     setIsExplore(false);
-    setIsMobileMenuOpen(false); // Cerrar menú móvil al navegar
+    setIsMobileMenuOpen(false);
   }
 
   // Función para resetear a home
@@ -847,7 +846,7 @@ export default function HomePage() {
     fetchFollowing();
   }
 
-  // NUEVA: Helper para encontrar el post padre de un reply
+  //  Helper para encontrar el post padre de un reply
   function findParentPost(parentId) {
     return posts.find(p => p.id === parentId);
   }
@@ -865,14 +864,14 @@ export default function HomePage() {
 
         <nav className="flex flex-col gap-2">
           <button
-            className="flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full"
+            className=" mama flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full"
             onClick={goHome}
           >
             <HomeIcon className="w-6 h-6" /> Home
           </button>
 
           <button
-            className={`flex items-center gap-4 text-xl text-left px-4 py-2 rounded-full ${
+            className={` mama flex items-center gap-4 text-xl text-left px-4 py-2 rounded-full ${
               isExplore ? "text-[#1d9bf0]" : "hover:text-[#1d9bf0]"
             }`}
             onClick={() => {
@@ -883,24 +882,24 @@ export default function HomePage() {
             <Search className="w-6 h-6" /> Explore
           </button>
 
-          <button className="flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
+          <button className=" mama flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
             <Bell className="w-6 h-6" /> Notifications
           </button>
 
-          <button className="flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
+          <button className=" mama flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
             <Mail className="w-6 h-6" /> Messages
           </button>
 
-          <button className="flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
+          <button className=" mama flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
             <Compass className="w-6 h-6" /> Grok
           </button>
 
-          <button className="flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
+          <button className=" mama flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
             <Users className="w-6 h-6" /> Communities
           </button>
 
           <button
-            className="flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full w-full"
+            className=" mama flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full w-full"
             onClick={async () => {
               try {
                 const { data, error } = await supabase
@@ -939,13 +938,13 @@ export default function HomePage() {
             <User className="w-6 h-6" /> Profile
           </button>
 
-          <button className="flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
+          <button className=" mama flex items-center gap-4 text-xl text-left hover:text-[#1d9bf0] px-4 py-2 rounded-full">
             <MoreHorizontal className="w-6 h-6" /> More
           </button>
         </nav>
 
         <button
-          className="bg-white text-black w-full mt-6 py-3 rounded-full font-bold hover:bg-[#1a8cd8] flex items-center justify-center gap-2"
+          className=" mama bg-white text-black w-full mt-6 py-3 rounded-full font-bold hover:bg-[#1a8cd8] flex items-center justify-center gap-2"
           onClick={() => setIsModalOpen(true)}
         >
           <PenSquare className="w-5 h-5" /> Post
@@ -975,7 +974,7 @@ export default function HomePage() {
         {showLogoutMenu && (
           <div className="absolute right-0 bottom-12 bg-gray-900 border border-gray-800 rounded-xl shadow-lg w-40 z-50">
             <button
-              className="w-full text-left px-4 py-2 hover:bg-gray-800 rounded-xl"
+              className=" mama w-full text-left px-4 py-2 hover:bg-gray-800 rounded-xl"
               onClick={logout}
             >
               Log out
@@ -1194,7 +1193,7 @@ export default function HomePage() {
 
         {/* FEED CENTRAL */}
         <main className="flex-1 border-r border-gray-800 max-h-screen overflow-y-auto scrollbar-hide lg:border-r-gray-800">
-          {/* Encabezado de perfil o tabs */}
+          {/* Encabezado de perfil */}
           {selectedUser ? (
             <div className="border-b border-gray-800 p-4 sticky top-0 bg-black z-10 hidden lg:block">
               <div className="flex items-center gap-4">
@@ -1215,7 +1214,7 @@ export default function HomePage() {
           ) : (
             <div className="flex justify-around border-b border-gray-800 sticky top-0 bg-black z-10">
               <button
-                className={`w-1/2 py-4 font-bold ${
+                className={` mama w-1/2 py-4 font-bold ${
                   activeTab === "forYou" ? "border-b-4 border-[#1d9bf0]" : ""
                 }`}
                 onClick={() => setActiveTab("forYou")}
@@ -1223,7 +1222,7 @@ export default function HomePage() {
                 For you
               </button>
               <button
-                className={`w-1/2 py-4 text-gray-400 hover:text-white ${
+                className={` mama w-1/2 py-4 text-gray-400 hover:text-white ${
                   activeTab === "following" ? "text-white" : ""
                 }`}
                 onClick={() => {
@@ -1276,7 +1275,7 @@ export default function HomePage() {
 
                   {selectedUser.birthdate && (
                     <p className="text-gray-400 mt-1">
-                      Born{" "}
+                      Nacido el{" "}
                       {(() => {
                         const d = new Date(selectedUser.birthdate);
                         return !isNaN(d.getTime())
@@ -1362,7 +1361,7 @@ export default function HomePage() {
 
                   {selectedUser.birthdate && (
                     <p className="text-gray-400">
-                      Born{" "}
+                      Nacido el{" "}
                       {(() => {
                         const d = new Date(selectedUser.birthdate);
                         return !isNaN(d.getTime())
@@ -1383,7 +1382,7 @@ export default function HomePage() {
                     {String(selectedUser.id) === String(user.uid) ? (
                       <button
                         onClick={openEditProfile}
-                        className="px-4 py-1 border rounded-full hover:bg-gray-900"
+                        className=" mama px-4 py-1 border rounded-full hover:bg-gray-900"
                       >
                         Edit profile
                       </button>
@@ -1408,7 +1407,7 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* Composer inline (solo si no estamos viendo perfil de usuario) */}
+
           {!selectedUser && (
             <form
               onSubmit={addPost}
@@ -1442,7 +1441,7 @@ export default function HomePage() {
                   </div>
                   <button
                     type="submit"
-                    className="bg-[#1d9bf0] text-white font-bold py-2 px-4 rounded-full hover:bg-blue-500 transition text-sm lg:text-base"
+                    className=" mama bg-[#1d9bf0] text-white font-bold py-2 px-4 rounded-full hover:bg-blue-500 transition text-sm lg:text-base"
                   >
                     Post
                   </button>
@@ -1451,7 +1450,7 @@ export default function HomePage() {
             </form>
           )}
 
-          {/* Si Explore o hay búsqueda -> mostrar lista de usuarios (autores) */}
+          {/* Si Explore o hay búsqueda -> mostrar lista de usuarios  */}
           {(isExplore || q.length > 0) && (
             <div className="p-4 border-b border-gray-800">
               <h3 className="font-bold mb-2">Users</h3>
@@ -1495,7 +1494,7 @@ export default function HomePage() {
                   key={post.id}
                   className="p-4 border-b border-gray-800 hover:bg-gray-900 transition"
                 >
-                  {/* NUEVO: Si es un reply, mostrar el post padre */}
+                  {/*  Si es un reply, mostrar el post padre */}
                   {parentPost && (
                     <div className="mb-3 p-3 border border-gray-700 rounded-lg bg-gray-900/30">
                       <div className="flex gap-3 text-sm">
@@ -1590,12 +1589,12 @@ export default function HomePage() {
                           />
                         ))}
                         
-                      {/* NUEVOS: Botones de interacción */}
+                      {/* Botones de interacción */}
                       <div className="flex items-center gap-6 mt-3">
                         {/* Botón Reply */}
                         <button
                           onClick={() => openReplyModal(post)}
-                          className="flex items-center gap-1 text-sm hover:bg-blue-900/20 hover:text-blue-400 rounded-full px-2 py-1 transition group text-gray-500"
+                          className=" mama flex items-center gap-1 text-sm hover:bg-blue-900/20 hover:text-blue-400 rounded-full px-2 py-1 transition group text-gray-500"
                         >
                           <MessageCircle className="w-5 h-5 group-hover:scale-110 transition" />
                           <span>{postReplies[post.id] || 0}</span>
@@ -1605,7 +1604,7 @@ export default function HomePage() {
                         <button
                           onClick={() => handleRepost(post.id)}
                           disabled={repostingPosts.has(post.id)}
-                          className={`flex items-center gap-1 text-sm hover:bg-green-900/20 hover:text-green-400 rounded-full px-2 py-1 transition group ${
+                          className={` mama flex items-center gap-1 text-sm hover:bg-green-900/20 hover:text-green-400 rounded-full px-2 py-1 transition group ${
                             postReposts[post.id]?.isReposted 
                               ? 'text-green-400' 
                               : 'text-gray-500'
@@ -1621,7 +1620,7 @@ export default function HomePage() {
                         <button
                           onClick={() => handleLike(post.id)}
                           disabled={likingPosts.has(post.id)}
-                          className={`flex items-center gap-1 text-sm hover:bg-red-900/20 hover:text-red-500 rounded-full px-2 py-1 transition group ${
+                          className={` mama flex items-center gap-1 text-sm hover:bg-red-900/20 hover:text-red-500 rounded-full px-2 py-1 transition group ${
                             postLikes[post.id]?.isLiked 
                               ? 'text-red-500' 
                               : 'text-gray-500'
@@ -1678,7 +1677,7 @@ export default function HomePage() {
               Subscribe to unlock new features and if eligible, receive a share
               of revenue.
             </p>
-            <button className="bg-[#1d9bf0] w-full py-2 rounded-full font-bold hover:bg-[#1a8cd8]">
+            <button className=" mama bg-[#1d9bf0] w-full py-2 rounded-full font-bold hover:bg-[#1a8cd8]">
               Subscribe
             </button>
           </div>
@@ -1702,7 +1701,7 @@ export default function HomePage() {
         <PenSquare className="w-6 h-6 text-white" />
       </button>
 
-      {/* MODAL para crear post - Mejorado para móvil */}
+      {/* MODAL para crear post -  para móvil */}
       {isModalOpen && (
         <div
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
@@ -1715,7 +1714,7 @@ export default function HomePage() {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg lg:text-xl font-bold">Create Post</h2>
               <button onClick={closeModal}>
-                <X className="text-gray-400 hover:text-white" />
+                <X className=" mama text-gray-400 hover:text-white" />
               </button>
             </div>
 
@@ -1776,7 +1775,7 @@ export default function HomePage() {
 
                 <button
                   type="submit"
-                  className="bg-[#1d9bf0] text-white font-bold py-2 px-4 lg:px-6 rounded-full hover:bg-blue-500 transition text-sm lg:text-base"
+                  className=" mama bg-[#1d9bf0] text-white font-bold py-2 px-4 lg:px-6 rounded-full hover:bg-blue-500 transition text-sm lg:text-base"
                 >
                   Post
                 </button>
@@ -1786,7 +1785,7 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* NUEVO: MODAL para reply */}
+      {/*  MODAL para reply */}
       {isReplyModalOpen && replyingToPost && (
         <div
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
@@ -1898,8 +1897,8 @@ export default function HomePage() {
                 <button
                   type="submit"
                   disabled={!replyContent.trim()}
-                  className="bg-[#1d9bf0] text-white font-bold py-2 px-4 lg:px-6 rounded-full hover:bg-blue-500 transition text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
-                >
+                  className=" mama bg-[#1d9bf0] text-white font-bold py-2 px-4 lg:px-6 rounded-full hover:bg-blue-500 transition text-sm lg:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                > 
                   Reply
                 </button>
               </div>
@@ -1908,7 +1907,7 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* MODAL EDIT PROFILE - Mejorado para móvil */}
+      {/*  EDIT PROFILE -  para móvil */}
       {isEditProfileOpen && (
         <div
           className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
@@ -2024,3 +2023,4 @@ export default function HomePage() {
     </div>
   );
 }
+
