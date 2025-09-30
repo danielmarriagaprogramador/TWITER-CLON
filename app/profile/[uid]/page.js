@@ -27,7 +27,7 @@ export default function ProfilePage() {
     if (!uid) return;
     fetchProfile(uid);
     fetchPosts(uid);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [uid]);
 
   async function fetchProfile(uid) {
@@ -211,4 +211,5 @@ export default function ProfilePage() {
     </div>
   );
 }
+
 
