@@ -90,7 +90,7 @@ export default function LoginModal() {
                 ✕
               </button>
 
-              {/* Logo con next/image */}
+       
               <Image
                 src="/twitter-x-logo-white (3).svg"
                 alt="Logo X"
@@ -166,4 +166,5 @@ export default function LoginModal() {
     </>
   );
 }
+
 
